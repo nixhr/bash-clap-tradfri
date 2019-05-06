@@ -1,10 +1,24 @@
-# bash-clap
-a pure bash script to detect hand claps
+# bash-clap-tradfri
+a pure bash script to detect hand claps and trigger actions to control ikea tradfri enabled lights
 
 ## Installation
+
 ##### Linux (Debian, Ubuntu, Raspbian, ...)
 ```bash
 apt-get install sox git
+```
+
+##### Install libcoap
+```bash
+sudo apt-get install build-essential autoconf automake libtool
+git clone --recursive https://github.com/obgm/libcoap.git
+cd libcoap
+git checkout dtls
+git submodule update --init --recursive
+./autogen.sh
+./configure --disable-documentation --disable-shared
+make
+sudo make install
 ```
 
 ##### macOS [(homebrew required)](https://brew.sh/)
@@ -13,7 +27,12 @@ brew install sox
 ```
 ##### Then
 ```bash
-git clone https://github.com/daweedm/bash-clap && cd bash-clap && chmod +x bash-clap.sh
+git clone https://github.com/nixhr/bash-clap-tradfri && cd bash-clap-tradfri && chmod +x bash-clap.sh
+```
+
+##### Configure ikea.conf
+```bash
+cp ikea.conf_dist ikea.conf
 ```
 
 ## Configuration
@@ -39,7 +58,7 @@ You get an output similar to this
 
 You might have more than one audio interface (integrated audio card, USB-wired mic, ...). Once you have chosen the interface you want to use, you can guess your audio source from the numbers **X** and **Y** : `src="alsa hw:X,Y"`
 
-Open `bash-clap.sh` and change the src variable to your audio source if it differs from the default one.
+Open `bash-clap-tradfri.sh` and change the src variable to your audio source if it differs from the default one.
 
 ##### macOS
 Nothing to do ! You can leave `src` value to `"auto"`
